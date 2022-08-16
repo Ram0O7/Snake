@@ -3,15 +3,20 @@ import {getInputDirection} from "./input.js"
 let snakeSpeed = 7;
 const speedBtns = document.querySelectorAll('.speed');
 
+const speedContainer = document.querySelectorAll('span');
+let currentSpeed = document.createElement('span');
+currentSpeed.classList.add('speednow');
+
 for (let i = 0; i < speedBtns.length; i++){
     speedBtns[i].addEventListener('click', () => {
+        speedContainer[0].appendChild(currentSpeed);
+        currentSpeed.innerHTML = snakeSpeed;
         if (speedBtns[i].innerHTML == '+') {
             snakeSpeed > 0&&snakeSpeed<20 ? snakeSpeed++ : snakeSpeed = 8;
-            console.log(snakeSpeed)
         } else {
             snakeSpeed>0 ? snakeSpeed-- : snakeSpeed=8;
-            console.log(snakeSpeed)
         }
+        // speedContainer[0].removeChild(currentSpeed);
     })
 }
 
@@ -68,4 +73,4 @@ function addInstances() {
     newInstance = 0;
 }
 
-export { snakeSpeed,update,draw,expandSnake,onSnake };
+export { snakeSpeed,update,draw,expandSnake,onSnake,speedContainer };

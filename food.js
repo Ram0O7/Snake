@@ -1,5 +1,9 @@
-import { onSnake, expandSnake } from "./snake.js"
+import { onSnake, expandSnake,speedContainer } from "./snake.js"
 import {randomGridPosition} from "./grid.js"
+
+const currentSize = document.createElement('span');
+currentSize.classList.add('speednow');
+speedContainer[1].appendChild(currentSize);
 
 const foodSound = new Audio('food.mp3');
 let food = getRandomFoodPostion();
@@ -8,10 +12,13 @@ const ExpansionBtns = document.querySelectorAll('.size');
 
 for (let i = 0; i < ExpansionBtns.length; i++){
     ExpansionBtns[i].addEventListener('click', () => {
+        currentSize.innerHTML = EXPANSION_RATE;
         if (ExpansionBtns[i].innerHTML == '+') {
             EXPANSION_RATE>0&&EXPANSION_RATE<10 ? EXPANSION_RATE++ : EXPANSION_RATE=1;
-            console.log(EXPANSION_RATE)
+        } else {
+            EXPANSION_RATE>0 ? EXPANSION_RATE-- : EXPANSION_RATE = 0;
         }
+
     })
 }
 

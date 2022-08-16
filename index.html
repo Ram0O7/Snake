@@ -11,6 +11,10 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
+:root{
+    --bg-color: #000;
+}
+
     * {
         margin: 0;
         padding: 0;
@@ -65,11 +69,11 @@
 
     .score {
         position: absolute;
-        color: rgb(35, 24, 24);
+        color: var(--bg-color);
         width: 100%;
         text-align: center;
         z-index: 1;
-        text-shadow: 2px 1px 4px #000;
+        text-shadow: 2px 1px 4px var(--bg-color);
     }
     @media (max-height:600px) {
         #canvas{
@@ -80,6 +84,7 @@
     @media (max-width:480px) {
         body {
             display: unset;
+            background-color: var(--bg-color);
         }
 
         #canvas {
@@ -104,10 +109,10 @@
             padding: 10px 15px;
             border: none;
             margin: 0 25px;
-            border: 2px solid #468dc7d1;
+            border: 2px solid #2CB1E6;
             border-radius: 30%;
             color: crimson;
-            background-color: #000;
+            background-color: var(--bg-color);
         }
 
         .arr {
@@ -131,7 +136,8 @@
 
         .snakecontrols span {
             display: flex;
-            color: wheat;
+            color: #2CB1E6;
+            font-weight: 700;
             align-items: center;
             gap: 4px;
             margin-inline: 4px;
@@ -151,8 +157,16 @@
         span:nth-child(2) {
             margin-left: auto;
         }
+        .speednow{
+            position: absolute;
+            top: -3vh;
+        }
+        span:nth-child(2) span{
+            margin-left: 85px;
+        }
     }
 </style>
+<script src="bgchangewithtime.js"></script>
 <script src="game.js" defer type="module"></script>
 
 <body>
