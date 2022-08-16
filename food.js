@@ -12,12 +12,12 @@ const ExpansionBtns = document.querySelectorAll('.size');
 
 for (let i = 0; i < ExpansionBtns.length; i++){
     ExpansionBtns[i].addEventListener('click', () => {
-        currentSize.innerHTML = EXPANSION_RATE;
         if (ExpansionBtns[i].innerHTML == '+') {
             EXPANSION_RATE>0&&EXPANSION_RATE<10 ? EXPANSION_RATE++ : EXPANSION_RATE=1;
         } else {
-            EXPANSION_RATE>0 ? EXPANSION_RATE-- : EXPANSION_RATE = 0;
+            EXPANSION_RATE>1 ? EXPANSION_RATE-- : EXPANSION_RATE = 1;
         }
+        currentSize.innerHTML = EXPANSION_RATE;
 
     })
 }

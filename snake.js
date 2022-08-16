@@ -10,13 +10,12 @@ currentSpeed.classList.add('speednow');
 for (let i = 0; i < speedBtns.length; i++){
     speedBtns[i].addEventListener('click', () => {
         speedContainer[0].appendChild(currentSpeed);
-        currentSpeed.innerHTML = snakeSpeed;
         if (speedBtns[i].innerHTML == '+') {
-            snakeSpeed > 0&&snakeSpeed<20 ? snakeSpeed++ : snakeSpeed = 8;
+            snakeSpeed > 0&&snakeSpeed<20 ? snakeSpeed++ : snakeSpeed = 7;
         } else {
-            snakeSpeed>0 ? snakeSpeed-- : snakeSpeed=8;
+            snakeSpeed>1 ? snakeSpeed-- : snakeSpeed=1;
         }
-        // speedContainer[0].removeChild(currentSpeed);
+        currentSpeed.innerHTML = snakeSpeed;
     })
 }
 
