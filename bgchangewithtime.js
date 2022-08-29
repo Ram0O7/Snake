@@ -7,7 +7,7 @@ function setBgToBlack() {
     r.style.setProperty('--bg-color', '#000');
 }
 function setBgToWhite() {
-    r.style.setProperty('--bg-color', '#fff');   
+    r.style.setProperty('--bg-color', 'gold');   
 }
 
 function changeBg() {
