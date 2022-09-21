@@ -47,18 +47,17 @@
         width: 100vmin;
         grid-template-columns: repeat(23, 1fr);
         grid-template-rows: repeat(23, 1fr);
-        /* background-color: #468dc7d1; */
         background: linear-gradient(#468dc7ab,rgba(220, 20, 60, 0.409));
         overflow: hidden;
     }
 
     .snake {
-        background-color: #000;
-        border: .25vmin dashed crimson;
+        background-color: rgba(0, 0, 0, 0.502);
+        border: .25vmin dotted crimson;
     }
 
     .food {
-        background-color: #bcebbab4;
+        background-color: #bcebbaec;
         border-radius: 50%;
         /* border: .25vmin solid #04152b; */
     }
@@ -70,11 +69,11 @@
 
     .score {
         position: absolute;
-        color: var(--bg-color);
+        color: crimson;
         width: 100%;
         text-align: center;
         z-index: 1;
-        text-shadow: 2px 1px 4px var(--bg-color);
+        text-shadow: 2px 1px 4px rgba(220, 20, 60, 0.5);
     }
     @media (max-height:600px) {
         #canvas{
@@ -91,8 +90,7 @@
         #canvas {
             position: absolute;
             top: 0;
-            box-shadow: inset -3px 3px 30px rgba(0, 0, 0, 0.5),
-                inset 3px -3px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 1px -3px 20px rgba(0, 0, 0, 0.5);
         }
 
         .Accessbtns {
