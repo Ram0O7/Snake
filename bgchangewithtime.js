@@ -4,7 +4,7 @@ let r = document.documentElement;
 
 // Create a function for setting a variable value
 function setBgToBlack() {
-    r.style.setProperty('--bg-color', 'rgba(0,0,0,0.6)');
+    r.style.setProperty('--bg-color', 'rgba(0,0,0)');
 }
 function setBgToWhite() {
     r.style.setProperty('--bg-color', '#0ff7');   
