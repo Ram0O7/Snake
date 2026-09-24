@@ -712,9 +712,11 @@ footer .brand{
   .touch-controls{
     order:1;
     grid-column:1 / -1;
-    display:flex;
+    display:grid;
+    grid-template-columns:repeat(3,56px);
+    grid-template-areas:". up ." "left down right";
     justify-content:center;
-    gap:12px
+    gap:10px
   }
   .touch-controls button{
     flex:0 0 56px;
@@ -734,3 +736,8 @@ footer .brand{
     border-bottom-width:1px
   }
 }
+
+.touch-controls [data-direction="up"]{grid-area:up}
+.touch-controls [data-direction="left"]{grid-area:left}
+.touch-controls [data-direction="down"]{grid-area:down}
+.touch-controls [data-direction="right"]{grid-area:right}
