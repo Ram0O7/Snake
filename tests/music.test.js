@@ -64,3 +64,41 @@ test('a stale playback rejection cannot mute a newer track', async () => {
   assert.equal(music.enabled, true);
   assert.equal(game.paused, false);
 });
+
+test('MP3 effects replay from the beginning and respect sound and visibility controls', () => {
+  const { music, tracks: [, , food, gameover] } = setup();
+  assert.equal(food.source, './food.mp3');
+  assert.equal(gameover.source, './gameover.mp3');
+  music.playEffect('food');
+  assert.equal(food.plays, 0);
+  music.toggle();
+  music.update('running');
+  music.playEffect('food');
+  food.currentTime = 1;
+  music.playEffect('food');
+  assert.equal(food.plays, 2);
+  assert.equal(food.currentTime, 0);
+  assert.equal(food.loop, false);
+  music.playEffect('gameover');
+  music.update('over');
+  assert.equal(gameover.paused, false);
+  music.toggle();
+  assert.equal(gameover.paused, true);
+  music.toggle();
+  music.update('paused');
+  music.playEffect('food');
+  music.update('running', true);
+  music.playEffect('food');
+  assert.equal(food.plays, 2);
+});
+
+test('effect playback failures do not interrupt gameplay or disable music', async () => {
+  const { music, tracks: [, , food, gameover] } = setup();
+  music.toggle();
+  food.play = () => Promise.reject(new Error('Playback failed'));
+  gameover.play = () => { throw new Error('Playback failed'); };
+  music.playEffect('food');
+  music.playEffect('gameover');
+  await Promise.resolve();
+  assert.equal(music.enabled, true);
+});
