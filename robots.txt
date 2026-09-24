@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ram0o7.github.io/Snake/sitemap.xml

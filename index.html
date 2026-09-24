@@ -1,198 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/266cde5198.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="snake.png" type="image/x-icon">
-    <title>Snake Game</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snake Arcade — Play the Free Classic Snake Game Online</title>
+<meta name="description" content="Play Snake Arcade, a free classic snake game in your browser. Choose your speed, eat apples, and beat your best score. Play on mobile or desktop, no download needed.">
+<meta name="theme-color" content="#171c18"><link rel="canonical" href="https://ram0o7.github.io/Snake/">
+<meta property="og:type" content="website"><meta property="og:title" content="Snake Arcade — One more bite."><meta property="og:description" content="The classic snake game, freshly reimagined. Free to play on desktop and mobile."><meta property="og:url" content="https://ram0o7.github.io/Snake/">
+<meta name="twitter:card" content="summary"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Snake Arcade","url":"https://ram0o7.github.io/Snake/","description":"A free browser-based classic snake game with three difficulty levels and keyboard and touch controls.","genre":"Arcade","gamePlatform":"Web browser","operatingSystem":"Any","applicationCategory":"GameApplication","isAccessibleForFree":true,"inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="game.js" type="module"></script>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-
-:root{
-    --bg-color: #000;
-}
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100vw;
-        margin: 0;
-        background-color: #000;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    main {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-    }
-
-    #canvas {
-        display: grid;
-        height: 100vmin;
-        width: 100vmin;
-        grid-template-columns: repeat(23, 1fr);
-        grid-template-rows: repeat(23, 1fr);
-        background: linear-gradient(#468dc7ab,rgba(220, 20, 60, 0.409));
-        overflow: hidden;
-    }
-
-    .snake {
-        background-color: rgba(0, 0, 0, 0.502);
-        border: .25vmin dotted crimson;
-    }
-
-    .food {
-        background-color: #bcebbaec;
-        border-radius: 50%;
-        /* border: .25vmin solid #04152b; */
-    }
-
-    .Accessbtns,
-    .snakecontrols {
-        display: none;
-    }
-
-    .score {
-        position: absolute;
-        color: crimson;
-        width: 100%;
-        text-align: center;
-        z-index: 1;
-        text-shadow: 2px 1px 4px rgba(220, 20, 60, 0.5);
-    }
-    @media (max-height:600px) {
-        #canvas{
-            height: 315px;
-            width: 315px;
-        }
-    }
-    @media (max-width:480px) {
-        body {
-            display: unset;
-            background-color: var(--bg-color);
-        }
-
-        #canvas {
-            position: absolute;
-            top: 0;
-            box-shadow: inset 1px -3px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .Accessbtns {
-            position: absolute;
-            bottom: 7vh;
-            display: block;
-        }
-
-        .centerbtns {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .btns {
-            padding: 10px 15px;
-            border: none;
-            margin: 0 25px;
-            border: 2px solid #2CB1E6;
-            border-radius: 30%;
-            color: crimson;
-            background-color: var(--bg-color);
-        }
-
-        .arr {
-            transition: all .05s linear;
-            font-size: 40px;
-        }
-
-        .arr:active {
-            border-bottom: 8px solid darken(crimson, 20);
-            text-shadow: 0 0 10px crimson, 0 0 10px crimson, 0 0 20px crimson;
-            transform: translate(0, 3px);
-        }
-
-        .snakecontrols {
-            width: 100%;
-            position: absolute;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            bottom: 2vh;
-        }
-
-        .snakecontrols span {
-            display: flex;
-            color: #2CB1E6;
-            font-weight: 700;
-            align-items: center;
-            gap: 4px;
-            margin-inline: 4px;
-        }
-
-        span .btns {
-            padding: 5px;
-            margin: 10px;
-            border-radius: 8px;
-            font-size: 18px;
-        }
-
-        span .arr {
-            margin: 4px;
-        }
-
-        span:nth-child(2) {
-            margin-left: auto;
-        }
-        .speednow{
-            position: absolute;
-            top: -3vh;
-        }
-        span:nth-child(2) span{
-            margin-left: 82px;
-        }
-    }
-</style>
-<script src="bgchangewithtime.js"></script>
-<script src="game.js" defer type="module"></script>
-
 <body>
-    <main>
-        <div id="canvas"></div>
-        <div class="Accessbtns">
-            <button class="btns"><i class="arr fa fa-arrow-up"></i></button>
-            <div class="centerbtns">
-                <button class="btns"><i class="arr fa fa-arrow-left"></i></button>
-                <button class="btns"><i class="arr fa fa-arrow-right"></i></button>
-            </div>
-            <button class="btns"><i class="arr fa fa-arrow-down"></i></button>
-
-        </div>
-
-        <div class="snakecontrols">
-            <span>SPEED
-                <button class="arr btns speed">+</button>
-                <button class="arr btns speed">-</button>
-            </span>
-            <span>
-                <button class="arr btns size">+</button>
-                <button class="arr btns size">-</button>
-                SIZE</span>
-        </div>
-
-    </main>
-</body>
-
-</html>
+<a class="skip" href="#game">Skip to game</a>
+<header class="site-header"><a href="./" class="brand" aria-label="Snake Arcade home"><span class="brand-icon" aria-hidden="true">▰</span> SNAKE<span class="brand-light">ARCADE</span></a><nav aria-label="Main navigation"><a href="#how-to-play">How to play <span>↗</span></a><span class="free-badge"><i></i> FREE TO PLAY</span></nav></header>
+<main>
+<section class="intro"><p class="eyebrow"><span>THE ORIGINAL TIME KILLER</span><span>OLD-SCHOOL PLAY / FRESH START</span></p><div class="intro-row"><h1><span class="sr-only">Play Snake online. </span>Small game.<br>Big <em>one-more-try</em> energy.</h1><p>A familiar little snake. A fresh start.<br>Grab a bite, find your rhythm, and see how far you grow.</p></div></section>
+<section class="arcade" id="game" aria-label="Play Snake Arcade">
+<div class="game-panel"><div class="scorebar"><div><span class="label">YOUR SCORE</span><strong id="score">000</strong></div><div class="best-score"><span class="label">PERSONAL BEST <span aria-hidden="true">♛</span></span><strong id="best">000</strong></div><span class="live-tag" id="state-label">READY WHEN YOU ARE</span></div>
+<div class="board-wrap"><canvas id="board" width="600" height="600" tabindex="0" aria-label="Snake game board. Swipe or use the direction buttons, arrow keys or W A S D to move. Space pauses the game.">Play Snake using a browser with canvas support. Use arrow keys or W A S D to move.</canvas><div class="overlay" id="overlay"><svg class="pixel-snake" aria-hidden="true" width="72" height="52" viewBox="0 0 72 52"><path d="M8 39V16h23v23h25V12h9" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><rect x="60" y="9" width="3" height="3" fill="#dceab6"/></svg><p class="eyebrow" id="overlay-kicker">A CLASSIC, WITH A FRESH COAT</p><h2 id="overlay-title">Hello, hungry.</h2><p id="overlay-copy">A little focus. A lot of apples.<br>How long can you last?</p><button class="primary" id="start">Let's play <span aria-hidden="true">↗</span></button><span class="start-hint" id="start-hint">or press Enter to start</span></div></div>
+<div class="board-footer"><span><i></i> <span id="mode-caption">CLASSIC / NORMAL</span></span><button id="pause" disabled aria-label="Pause game">Ⅱ Pause</button><button id="sound" aria-pressed="false">♪ Sound off</button></div>
+</div>
+<aside class="sidebar"><section class="settings"><p class="eyebrow">MAKE IT YOUR GAME</p><h2>Pick your pace.</h2><p class="muted">Same snake. Different heartbeat.</p><div class="difficulty" role="group" aria-label="Difficulty"><button data-mode="chill" aria-pressed="false"><span class="mode-icon">◔</span><span><strong>Chill</strong><small>A little room to breathe</small></span><span class="mode-number">01</span></button><button data-mode="normal" class="selected" aria-pressed="true"><span class="mode-icon">ϟ</span><span><strong>Normal</strong><small>The original sweet spot</small></span><span class="mode-number">02</span></button><button data-mode="fast" aria-pressed="false"><span class="mode-icon">↯</span><span><strong>Fast</strong><small>Think less. React more.</small></span><span class="mode-number">03</span></button></div><p class="setting-note" id="setting-note">Choose a pace before your next run.</p></section>
+<section class="controls"><p class="eyebrow">THE SHORT VERSION</p><div class="control-row"><span>Move around</span><span class="keys">↑ ← ↓ →</span></div><div class="control-row"><span>Also move around</span><span class="keys">W A S D</span></div><div class="control-row"><span>Take a breather</span><kbd>SPACE</kbd></div><p>On your phone? Swipe the board or use the buttons below.</p></section>
+<div class="tip"><span aria-hidden="true">✳</span><p>Life advice, snake edition:<br><strong>Don't run into yourself.</strong></p></div></aside>
+<div class="touch-controls" role="group" aria-label="Touch direction controls"><button type="button" aria-controls="board" data-direction="up" aria-label="Move up">↑</button><button type="button" aria-controls="board" data-direction="left" aria-label="Move left">←</button><button type="button" aria-controls="board" data-direction="down" aria-label="Move down">↓</button><button type="button" aria-controls="board" data-direction="right" aria-label="Move right">→</button></div>
+</section>
+<p class="under-game"><span>NO DOWNLOADS. NO SIGN-UPS. JUST SNAKE.</span><span>Your best score stays on this device. <span aria-hidden="true">↗</span></span></p>
+<section class="how-to" id="how-to-play"><div><p class="eyebrow">EASY TO LEARN. HARD TO LEAVE.</p><h2>Three rules.<br>Endless retries.</h2><p>Play the classic Snake game online for free, right in your browser. Built for a quick break on your computer, tablet, or phone.</p></div><article><span class="step">01 /</span><h3>Follow your appetite.</h3><p>Use the arrow keys, WASD, or touch controls to collect red apples. Every apple adds 10 points and makes your snake longer.</p></article><article><span class="step">02 /</span><h3>Watch your head.</h3><p>The walls aren't your friends. Neither is your tail. Hitting the edge or your own body ends the run.</p></article><article><span class="step">03 /</span><h3>Go one better.</h3><p>Find your pace and beat your personal best. Each difficulty keeps its own record, saved on this browser.</p></article></section>
+<section class="faq" aria-labelledby="faq-title"><h2 id="faq-title">A few small answers.</h2><details><summary>Is Snake Arcade free to play?</summary><p>Yes. The entire game is free, with no account, installation, or download required.</p></details><details><summary>Can I play Snake on my phone?</summary><p>Yes. Swipe on the game board or tap the direction buttons. On desktop, use your arrow keys or WASD. Press Space or the Pause button to pause.</p></details><details><summary>How do scores and difficulty work?</summary><p>Every apple earns 10 points. Chill, Normal, and Fast change how quickly the snake moves. Your best score for each pace is stored locally in your browser, not on a global leaderboard. Clearing browser data resets it.</p></details></section>
+<noscript><p class="noscript">Enable JavaScript to play Snake Arcade. You can still read the rules and controls on this page.</p></noscript>
+<p class="sr-only" role="status" id="announcement" aria-live="polite"></p>
+</main><footer><a class="brand" href="./">SNAKE<span class="brand-light">ARCADE</span></a><span>Made for the joy of playing.</span><a href="#game">One more round? ↑</a></footer>
+</body></html>
